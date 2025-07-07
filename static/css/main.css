@@ -1,0 +1,14 @@
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-brand {
+  color: white;
+}
+
+.search-input {
+  width: 400px;
+}
+
+@media (max-width: 768px) {
+  .search-input {
+    width: 100%;
+  }
+}
