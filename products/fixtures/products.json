@@ -1,0 +1,513 @@
+[
+  {
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+      "sku": "rod001",
+      "name": "SvartZonker Black Series The Horizon 9' Spinning 30-100g",
+      "description": "The blanks are lighter, faster and has a beautiful glossy finish. The guides was upgraded to lighter ones, but still more rigid.",
+      "price": 88.80,
+      "rating": 3.8,
+      "image": "product_images/SvartZonker.jpg",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+      "sku": "rod002",
+      "name": "Savage Gear SG4 Medium Game 8'/2.43m XF 10-30g/MML 2sec",
+      "description": "Savage Gear SG4 Medium Game are spinning rods for perch and zander fishing. Fast spinning rods with perfect balance for optimal contact with the lure when jig and twitch-fishing.",
+      "price": 119,
+      "rating": 3.5,
+      "image": "product_images/Savage_Gear_SG4.jpg",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+      "sku": "rod003",
+      "name": "Savage Gear SG2 Medium Game 9'/2.74m F 7-25g/ML 2sec",
+      "description": "Savage Gear SG2 Medium Game is a fast action and well balanced rod for perch and zander fishing in a incredible value for money offer!",
+      "price": 99,
+      "rating": 4.1,
+      "image": "product_images/Savage_Gear_SG2.jpg",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+      "sku": "rod004",
+      "name": "Daiwa Prorex S Spin 8'0'' 10-40G",
+      "description": "Daiwa Prorex S Spin are spinning rods with thin, lightweight blanks and a stylish Prorex design. Spinning rods in a range of models to suit many types of predator fishing!",
+      "price": 84.90,
+      "rating": 4.9,
+      "image": "product_images/Daiwa_Prorex_S.jpg",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+      "sku": "rod005",
+      "name": "Westin W3 StreetStick 2nd 8'1/243cm M 2-10g 2sec",
+      "description": "Westin W3 StreetStick 2nd are lightweight reel rods with a stylish, uncluttered design. Sensitive rods for the lightest fishing!",
+      "price": 139,
+      "rating": 3.7,
+      "image": "product_images/Westin_W3_StreetStick.jpg",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+      "sku": "rod006",
+      "name": "Megabass Evoluzion Laikiri F3.1/2-73tix-S",
+      "description": "The Megabass Evoluzion Raikiri is a high-performance flagship spinning rod built for extreme casting distances and precision lure control. Designed to excel with finesse rigs and 1/2oz shads or minnows—even in harsh wind conditions.",
+      "price": 889,
+      "rating": 3.7,
+      "image": "product_images/Megabass_Evolution_Laikiri.jpg",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+      "sku": "rod007",
+      "name": "Abu Garcia Beast Pike 862XXH 40-140g Spinning",
+      "description": "BEAST is the number one sub brand for avid pike anglers. After BEAST X and BEAST PRO, BEAST is the third and lowest level price point for high quality Abu Garcia pike rods.",
+      "price": 89.90,
+      "rating": 4.5,
+      "image": "product_images/Abu_Garcia_Beast_Pike.jpg",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+      "sku": "rod008",
+      "name": "Abu Garcia Sölv",
+      "description": "The new Abu SÖLV AG1 range is the premium rod range of a brand new concept that has been especially designed for the specialized seatrout anglers.",
+      "price": 419,
+      "rating": 4.6,
+      "image": "product_images/Abu_Garcia_Solv.jpg",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+      "sku": "rod009",
+      "name": "Shimano Catana FX Spinning M-F 2,69m 8'10'' 10-30g 2pc",
+      "description": "The Catana FX lure rods combine exceptional value with the latest actions and modern looks. Available in both fast and moderate-fast actions, in a wide range of options, Catana will elevate your performance to a new level.",
+      "price": 59.90,
+      "rating": 4.4,
+      "image": "product_images/Shimano_Catana_FX.jpg",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+      "sku": "rod010",
+      "name": "Shimano Sahara Spinning Fast - 2,13m 7'0'' 14-42g 2pc",
+      "description": "The Shimano Sahara Spinning rod series combines sleek design with exceptional functionality. Crafted from Full Carbon blanks with Diaflash technology, these rods are lightweight, powerful, and perfectly paired with Sahara reels",
+      "price": 119,
+      "rating": 4.4,
+      "image": "product_images/Shimano_Sahara.jpg",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+      "sku": "ree001",
+      "name": "Daiwa Black Gold 4500",
+      "description": "The next generation of our ever popular BG spinning reel series just got leaner and meaner.",
+      "price": 139,
+      "rating": 3.7,
+      "image": "product_images/Daiwa_Black_Gold.jpg",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+      "sku": "ree002",
+      "name": "Shimano Vanford FA - 4000XG",
+      "description": "Shimano Vanford FA - Vanford is one of Shimano’s most sensitive spinning reels. Perfect for a wide range of finesse fishing styles, the Vanford is part of the Magnumlite Series and pushes the boundaries of lightweight technology and engineering, delivering remarkable finesse that you can actually feel and will most certainly appreciate.",
+      "price": 219,
+      "rating": 4.3,
+      "image": "product_images/Shimano_Vanford_FA.jpg",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+      "sku": "ree003",
+      "name": "Daiwa 23 Ninja LT 2500",
+      "description": "Daiwa 23 Ninja LT - With the 23' Ninja, DAIWA presents the latest Japanese design concept and inspirational techniques at an outstanding price-performance ratio! Compared to the previous model, the 23' Ninja has been improved in essential features and is now more sensitive and stronger.",
+      "price": 49.90,
+      "rating": 4.2,
+      "image": "product_images/Daiwa_23_Ninja.jpg",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+      "sku": "ree004",
+      "name": "Daiwa 21 Ballistic MQ LT 3000D",
+      "description": "The Ballistic you have come to know and love has been redesigned and upgraded. Still featuring the LT Concept for the ultimate in Light and Tough performance- now complete with our Monocoque Body (MQ) for even more power and a more compact frame.",
+      "price": 189,
+      "rating": 3.7,
+      "image": "product_images/Daiwa_21_Ballistic.jpg",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 15,
+    "fields": {
+      "sku": "ree005",
+      "name": "Daiwa 25 Tatula TW 200L",
+      "description": "Daiwa 25 Tatula TW 200 is built for strength and precision, featuring HYPERDRIVE DESIGN for peak fishing performance.",
+      "price": 209,
+      "rating": 4.5,
+      "image": "product_images/Daiwa_25_Tatula.jpg",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 16,
+    "fields": {
+      "sku": "ree006",
+      "name": "Daiwa 20 Ninja LT 4000 Pitch Black incl. J-Braid Yellow 0,25mm",
+      "description": "Daiwa Ninja LT Pitch Black, Sportfishtackles' own custom reel from japanese Daiwa! Here with spooled J-Braid X4 YL, ready to go!",
+      "price": 59,
+      "rating": 3.9,
+      "image": "product_images/Daiwa_20_Ninja.jpg",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 17,
+    "fields": {
+      "sku": "ree007",
+      "name": "Shimano Catana 4000 FE Prespooled PowerPro 0,19mm",
+      "description": "Catana FE is the latest version of a Shimano classic. The Catana offers exceptional value for money and can be used for almost any freshwater application. Here combined with the round and supple PowerPro Hi-Vis Yellow braided line pre-spooled and ready.",
+      "price": 59.90,
+      "rating": 4.8,
+      "image": "product_images/Shimano_Catana.jpg",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 18,
+    "fields": {
+      "sku": "ree008",
+      "name": "Shimano Stradic FM 4000",
+      "description": "Shimano Stradic FM - The versatile Stradic offers exceptional performance and delivers an enviable combination of strength, refinement and smoothness. Backed by years of history and a faultless reputation, the next generation Stradic is a reel that consistently delivers class-leading performance.",
+      "price": 189,
+      "rating": 4.4,
+      "image": "product_images/Shimano_Stradic.jpg",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 19,
+    "fields": {
+      "sku": "ree009",
+      "name": "Shimano Ultegra",
+      "description": "The Ultegra FC is the ultimate evolution of one of Shimano's most popular mid-priced reels.",
+      "price": 139,
+      "rating": 4.9,
+      "image": "product_images/Shimano_Ultegra.jpg",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 20,
+    "fields": {
+      "sku": "ree010",
+      "name": "Daiwa 20 Saltiga - 10000H",
+      "description": "Saltiga from Daiwa is built to Break Your Record with every piece and point carefully selected to help anglers achieve their fishing dreams. An incredible reel for heavy saltwater fishing!",
+      "price": 879,
+      "rating": 3.7,
+      "image": "product_images/Daiwa_20_Saltiga.jpg",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 21,
+    "fields": {
+      "sku": "lin001",
+      "name": "Daiwa J-Braid Expedition x8E 500m Multi Color - 0.35mm",
+      "description": "Daiwa J-Braid Expedition x8E 500m Multi Color - J-Braid just got even better, with the introduction of J-Braid Expedition. Featuring the same IZANAS fibre construction that has made J-BRAID so popular, but now featuring Daiwa’s Silicon “Coating PE” technology to create a slicker, smoother braid with hydrophobic properties that increases durability & enhances feel.",
+      "price": 59.90,
+      "rating": 3.8,
+      "image": "product_images/Daiwa_J-Braid_Expedition.jpg",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 22,
+    "fields": {
+      "sku": "lin002",
+      "name": "PerchFight Braid X8V2. 0.14mm/10kg - 135m, Fluo Lime",
+      "description": "PerchFight Braid X8V2 is a state-of-the-art, silent braid line with superior knot strength, abrasion resistance and a silky smooth surface. A reliable braided line with all the features you want for bass and walleye fishing! Available in Fluo orange and Fluo lime color. X8V2 has applied a unique technology in ''Fluorotec'' coating that gives the line exceptional durability and ensures smoother, quieter and longer casts.",
+      "price": 23.90,
+      "rating": 4.8,
+      "image": "product_images/PerchFight_Braid.jpg",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 23,
+    "fields": {
+      "sku": "lin003",
+      "name": "Berkley X9 0,30mm 150m Lo-Vis Green",
+      "description": "The Berkley X9 150 Lo-Vis Green is a reliable and discreet braided line from Berkley. 9 strands make it stronger than many comparable lines on the market!",
+      "price": 26.90,
+      "rating": 4.7,
+      "image": "product_images/Berkley_X9.jpg",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 24,
+    "fields": {
+      "sku": "lin004",
+      "name": "Sufix 91 Braid Lo-Vis Green 150m 0,235mm 14,5kg",
+      "description": "Sufix 91 is a braided line with a perfectly round profile. Its advantages include the fact that it gives long casts but also that it is incredibly quiet in the guides.",
+      "price": 33.90,
+      "rating": 4.7,
+      "image": "product_images/Sufix_91.jpg",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 25,
+    "fields": {
+      "sku": "lin005",
+      "name": "Shimano Kairiki 8 300m Steel Gray - 0.28mm 29.3kg",
+      "description": "Shimano Kairiki 8 300m Yellow is a soft, silent, 8-strand braided line. A delicate braid line that is great for jig fishing!",
+      "price": 34.90,
+      "rating": 4.5,
+      "image": "product_images/Shimano_Kairiki.jpg",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 31,
+    "fields": {
+      "sku": "lur001",
+      "name": "Pig Hula Chatterbait, 21g - Craw Cracker",
+      "description": "Pig Hula is a bladed jig from Catch with Care. Built on the classic set up of a traditional chatterbait, the Pig Hula attracts the eye of big perch",
+      "price": 8.80,
+      "rating": 4.8,
+      "image": "product_images/Pig_Hula_Chatterbait.jpg",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 32,
+    "fields": {
+      "sku": "lur002",
+      "name": "Wolfcreek Shad 20cm, 75g - Baltic Herring",
+      "description": "Wolfcreek Shad 20cm, 75g are wide profile jigs with a stable, rolling action. A notorious jig among pike anglers!",
+      "price": 11.90,
+      "rating": 4.6,
+      "image": "product_images/Wolfcreek_Shad_20cm.jpg",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 33,
+    "fields": {
+      "sku": "lur003",
+      "name": "Berkley Pulse Spintail XL 18g - Perch",
+      "description": "Long casts and easy to fish. Pulse Spintail is a small inline spinner with an extra twist!",
+      "price": 8.80,
+      "rating": 4.3,
+      "image": "product_images/Berkley_Pulse_Spintail.jpg",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 34,
+    "fields": {
+      "sku": "lur004",
+      "name": "Scout Shad 12cm (4pcs) - Transparent Perch",
+      "description": "Söder Tackle's successful Scout Shad comes here in a 12 cm size, designed for jig fishing for large perch and zander!",
+      "price": 7.70,
+      "rating": 4.4,
+      "image": "product_images/Scout_Shad_12cm.jpg",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 35,
+    "fields": {
+      "sku": "lur005",
+      "name": "Piglet Shad 8,5cm (8-pack) - Brown Chartreuse - 8pcs",
+      "description": "Piglet Shad is the newest member of The Pig family. This 10cm softbait is designed mainly for perch fishing but is a lot more than your average softbait.",
+      "price": 9.70,
+      "rating": 4.2,
+      "image": "product_images/Piglet_Shad_8,5cm.jpg",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 41,
+    "fields": {
+      "sku": "clo001",
+      "name": "SavageGear WP Performance Jacket",
+      "description": "Technical and durable in modern design from Savage Gear.",
+      "price": 139,
+      "rating": 3.9,
+      "image": "product_images/SavageGear_WP_Performance_Jacket.jpg",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 42,
+    "fields": {
+      "sku": "clo002",
+      "name": "SavageGear WP Performance Trousers",
+      "description": "Technical, durable trousers in modern design!",
+      "price": 109,
+      "rating": 4.0,
+      "image": "product_images/SavageGear_WP_Performance_Trousers.jpg",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 43,
+    "fields": {
+      "sku": "clo003",
+      "name": "Grundéns Dark Seas X Grundens Instinctive SS T-Shirt Black",
+      "description": "The Grundéns Dark Seas X Grundéns Instinctive SS T-Shirt is designed for those who are drawn to the water—whether you're setting sail, relaxing on the beach, or out for the night.",
+      "price": 30.90,
+      "rating": 4.6,
+      "image": "product_images/Grundéns_Dark_Seas_X_Grundens_Instinctive.jpg",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 44,
+    "fields": {
+      "sku": "clo004",
+      "name": "Simms Sflex Hoody Sterling",
+      "description": "Simms SolarFlex Hoody Sterling, quick-drying and lightweight hoodie with UPF 50 for all-day sun protection and comfort.",
+      "price": 99.90,
+      "rating": 4.9,
+      "image": "product_images/Simms_Sflex_Hoody_Sterling.jpg",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 45,
+    "fields": {
+      "sku": "clo005",
+      "name": "Svartzonker McTail Hoodie",
+      "description": "Svartzonker McTail Hoodie is a hoodie with a warm fleece inside. Warm and cosy hoodies with Svartzonker logo on the chest and nice McTail print on the back!",
+      "price": 48.90,
+      "rating": 3.6,
+      "image": "product_images/Svartzonker_McTail_Hoodie.jpg",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 51,
+    "fields": {
+      "sku": "dea001",
+      "name": "Pig Shad, 23cm, 90g - Black Okiboji Perch",
+      "description": "Pig Shad is a soft-plastic shad inspired by the classic jerkbait The Pig!",
+      "price": 7.90,
+      "original_price": 11.90,
+      "rating": 4.9,
+      "image": "product_images/Pig_Shad_23cm_90g.jpg",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 52,
+    "fields": {
+      "sku": "dea002",
+      "name": "Scout Jerkbait 16 cm 68g Slow Sink - Blue Gill",
+      "description": "Scout Jerkbait is an incredibly easy-to-fish and effective jerk bait. Fished best by crank-jerking or twitching to get a nice side-to-side walk. Scout Jerk has a nice swimming action during normal spinning, easily sweeps out to the sides at spin-stops.",
+      "price": 8.60,
+      "original_price": 16.90,
+      "rating": 3.6,
+      "image": "product_images/Scout_Jerkbait_16.jpg",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 53,
+    "fields": {
+      "sku": "dea003",
+      "name": "Gunki Boomer 14g - Acid Craw M.S",
+      "description": "Gunki chatterbait designed to imitate the small reptiles found in our waterways.",
+      "price": 11.90,
+      "original_price": 16.90,
+      "rating": 4.5,
+      "image": "product_images/Gunki_Boomer.jpg",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 54,
+    "fields": {
+      "sku": "dea004",
+      "name": "Pig Hula Chatterbait 11g - Batman",
+      "description": "Pig Hula is a bladed jig from Catch with Care. Built on the classic set up of a traditional chatterbait, the Pig Hula attracts the eye of the big perch angler!",
+      "price": 7,
+      "original_price": 13.90,
+      "rating": 4.5,
+      "image": "product_images/Pig_Hula_Chatterbait_batman.jpg",
+      "category": 6
+    }
+  }
+]

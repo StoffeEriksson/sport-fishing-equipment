@@ -1,0 +1,8 @@
+[
+    { "pk": 1, "model": "products.category", "fields": { "name": "rods", "friendly_name": "Rods" } },
+    { "pk": 2, "model": "products.category", "fields": { "name": "reels", "friendly_name": "Reels" } },
+    { "pk": 3, "model": "products.category", "fields": { "name": "lines", "friendly_name": "Lines" } },
+    { "pk": 4, "model": "products.category", "fields": { "name": "lures", "friendly_name": "Lures" } },
+    { "pk": 5, "model": "products.category", "fields": { "name": "clothes", "friendly_name": "Clothes" } },
+    { "pk": 6, "model": "products.category", "fields": { "name": "deals", "friendly_name": "Deals" } }
+]
