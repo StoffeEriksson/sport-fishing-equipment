@@ -1,10 +1,26 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product
+from .models import Product, Category
 
-def product_list(request):
+
+def home(request):
+    deals = Product.objects.filter(category__name='deals')
+    return render(request, 'products/home.html', {'deals': deals})
+
+
+def all_products(request):
     products = Product.objects.all()
-    return render(request, 'products/product_list.html', {'products': products})
+    return render(request, 'products/products.html', {'products': products})
 
-def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    return render(request, 'products/product_detail.html', {'product': product})
+
+def category_view(request, category_name):
+    if category_name == "all":
+        products = Product.objects.all()
+        category = None
+    else:
+        category = get_object_or_404(Category, name=category_name)
+        products = Product.objects.filter(category=category)
+
+    return render(request, 'products/products.html', {
+        'products': products,
+        'selected_category': category,
+    })
