@@ -3,8 +3,10 @@
   color: white;
 }
 
-.search-input {
-  width: 400px;
+.input-group .form-control:focus {
+  box-shadow: none;
+  background-color: #1a1a1a;
+  color: white;
 }
 
 @media (max-width: 768px) {
@@ -12,3 +14,4 @@
     width: 100%;
   }
 }
+

@@ -28,4 +28,19 @@ def category_view(request, category_name):
 
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    return render(request, 'products/product_detail.html', {'product': product})
+    related_products = Product.objects.filter(category=product.category).exclude(pk=pk)[:4]
+    return render(request, 'products/product_detail.html', {
+        'product': product,
+        'related_products': related_products
+    })
+
+
+def search(request):
+    query = request.GET.get('q', '')
+    products = Product.objects.filter(
+        Q(name__icontains=query) | Q(description__icontains=query)
+    )
+    return render(request, 'products/products.html', {
+        'products': products,
+        'search_term': query,
+    })
