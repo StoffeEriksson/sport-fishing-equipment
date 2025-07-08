@@ -1,19 +1,31 @@
 from django.db import models
 
 
-class Product(models.Model):
-    CATEGORY_CHOICES = [
-        ('rods', 'Rods'),
-        ('reels', 'Reels'),
-        ('lines', 'Lines'),
-    ]
+class Category(models.Model):
 
-    name = models.CharField(max_length=100)
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
-    stock = models.PositiveIntegerField()
+    class Meta:
+        verbose_name_plural = 'Categories'
+        
+    name = models.CharField(max_length=254)
+    friendly_name = models.CharField(max_length=254, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_friendly_name(self):
+        return self.friendly_name
+
+
+class Product(models.Model):
+    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
+    sku = models.CharField(max_length=254, null=True, blank=True)
+    name = models.CharField(max_length=254)
     description = models.TextField()
-    image = models.ImageField(upload_to='product_images/', blank=True)
+    original_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    stock = models.PositiveIntegerField(null=True, blank=True)
+    rating = models.DecimalField(max_digits=3, decimal_places=1)
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name
