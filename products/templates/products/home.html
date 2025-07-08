@@ -30,7 +30,7 @@
             {% else %}
               <p><strong>${{ product.price }}</strong></p>
             {% endif %}
-            <a href="#" class="btn btn-primary mt-auto">View</a>
+            <a href="{% url 'product_detail' product.pk %}" class="btn btn-outline-secondary mx-2 mt-auto">View</a>
           </div>
         </div>
       </div>
