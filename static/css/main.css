@@ -5,9 +5,11 @@
 
 .input-group .form-control:focus {
   box-shadow: none;
-  background-color: #1a1a1a;
+  background-color: black;
   color: white;
+  
 }
+
 
 @media (max-width: 768px) {
   .search-input {
