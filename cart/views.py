@@ -62,3 +62,11 @@ def remove_from_cart(request, product_id):
     cart.pop(str(product_id), None)
     request.session['cart'] = cart
     return redirect('view_cart')
+
+
+def clear_cart(request):
+    """
+    Completely empty the cart by clearing the session data.
+    """
+    request.session['cart'] = {}
+    return redirect('view_cart')

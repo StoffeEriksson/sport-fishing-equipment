@@ -4,7 +4,7 @@
   <h2 class="text-white">Your Cart</h2>
 
   {% if cart_items %}
-    <form method="post" action="">
+    <form method="post" action="{% url 'clear_cart' %}">
       {% csrf_token %}
       <button type="submit" class="btn btn-outline-danger mb-3">Clear Cart</button>
     </form>
