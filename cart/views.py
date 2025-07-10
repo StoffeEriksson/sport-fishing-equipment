@@ -25,3 +25,13 @@ def view_cart(request):
         'total': total
     })
 
+
+def add_to_cart(request, product_id):
+    """
+    Add a product to the cart or increase its quantity.
+    """
+    cart = request.session.get('cart', {})
+    quantity = int(request.POST.get('quantity', 1))
+    cart[str(product_id)] = cart.get(str(product_id), 0) + quantity
+    request.session['cart'] = cart
+    return redirect('view_cart')
