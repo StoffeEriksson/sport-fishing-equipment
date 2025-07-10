@@ -52,3 +52,13 @@ def update_cart(request, product_id):
 
     request.session['cart'] = cart
     return redirect('view_cart')
+
+
+def remove_from_cart(request, product_id):
+    """
+    Remove a single product from the cart.
+    """
+    cart = request.session.get('cart', {})
+    cart.pop(str(product_id), None)
+    request.session['cart'] = cart
+    return redirect('view_cart')
