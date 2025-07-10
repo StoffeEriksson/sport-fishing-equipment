@@ -9,12 +9,13 @@
       <button type="submit" class="btn btn-outline-danger mb-3">Clear Cart</button>
     </form>
 
-    <table class="table table-dark table-bordered">
+    <table class="table table-dark table-bordered align-middle">
       <thead>
         <tr>
           <th>Image</th>
           <th>Product</th>
           <th>Price</th>
+          <th>Size</th>
           <th>Quantity</th>
           <th>Subtotal</th>
           <th>Actions</th>
@@ -25,24 +26,37 @@
         <tr>
           <td>
             {% if item.product.image %}
-            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="height: 80px;">
+              <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="height: 80px;">
             {% else %}
-            <span class="text-muted">No image</span>
+              <span class="text-muted">No image</span>
             {% endif %}
           </td>
-          <td>{{ item.product.name  }}</td>
+          <td>{{ item.product.name }}</td>
           <td>${{ item.product.price }}</td>
           <td>
             <form method="post" action="{% url 'update_cart' item.product.id %}">
               {% csrf_token %}
-              <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control d-inline w-50" />
-              <button type="submit" class="btn btn-sm btn-success">Update</button>
-            </form>
+              {% if item.product.category.name == "clothes" %}
+                <select name="size" class="form-select mb-2">
+                  {% for s in sizes %}
+                    <option value="{{ s }}" {% if item.size == s %}selected{% endif %}>{{ s }}</option>
+                  {% endfor %}
+                </select>
+              {% else %}
+                <span class="text-white">N/A</span>
+                <input type="hidden" name="size" value="">
+              {% endif %}
+          </td>
+          <td>
+              <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control" />
           </td>
           <td>${{ item.subtotal|floatformat:2 }}</td>
           <td>
+              <button type="submit" class="btn btn-sm btn-success mb-2">Update</button>
+            </form>
             <form method="post" action="{% url 'remove_from_cart' item.product.id %}">
               {% csrf_token %}
+              <input type="hidden" name="size" value="{{ item.size }}">
               <button type="submit" class="btn btn-sm btn-danger">Remove</button>
             </form>
           </td>
