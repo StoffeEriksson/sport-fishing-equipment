@@ -69,12 +69,15 @@
     </div>
 
     <!-- Free delivery banner -->
-    {% block page_header %}
-    <div class="row text-center my-3">
-      <div class="col">
-        <h5 class="fw-bold">Free delivery on orders over ${{ free_delivery_threshold }}!</h5>
+    {% if free_delivery_delta > 0 %}
+      <div id="delivery-banner" class="bg-danger text-white text-center mb-4 py-2">
+        Spend ${{ free_delivery_delta|floatformat:2 }} more for free delivery!
       </div>
-    </div>
+    {% else %}
+      <div id="delivery-banner" class="bg-success text-white text-center mb-4 py-2">
+        🎉 You get free delivery!
+      </div>
+    {% endif %}
 
     <!-- Category buttons -->
     <div class="row text-center mb-4">
@@ -88,6 +91,7 @@
         <a href="{% url 'category_view' 'deals' %}" class="btn btn-outline-secondary">Deals</a>
       </div>
     </div>
+    {% block page_header %}
     {% endblock %}
 
     <!-- Main content -->

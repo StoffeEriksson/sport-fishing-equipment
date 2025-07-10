@@ -70,8 +70,6 @@
       <div class="card-footer bg-dark border-0 mt-auto">
         <form method="post" action="{% url 'add_to_cart' item.pk %}">
           {% csrf_token %}
-          <input type="hidden" name="quantity" value="1">
-          <button type="submit" class="btn btn-danger w-100">Add to cart</button>
         </form>
       </div>
     </div>
