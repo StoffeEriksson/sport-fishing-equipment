@@ -19,7 +19,11 @@
         <p><strong>${{ product.price }}</strong></p>
       {% endif %}
       <p>Rating: {{ product.rating }}</p>
-      <button class="btn btn-danger text-white">Add to Cart</button>
+      <form method="post" action="{% url 'add_to_cart' product.id %}">
+        {% csrf_token %}
+        <input type="number" name="quantity" value="1" min="1" class="form-control w-25 d-inline">
+        <button type="submit" class="btn btn-danger">Add to cart</button>
+      </form>
     </div>
   </div>
 </div>
