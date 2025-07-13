@@ -1,16 +1,52 @@
+/* Reset default margin and padding, and prevent horizontal overflow */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+
+
+/* Make all images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Prevent .container from overflowing */
+.container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Navbar styles */
 .navbar-dark .navbar-nav .nav-link,
 .navbar-dark .navbar-brand {
   color: white;
 }
 
+/* Remove blue outline and keep dark background for search */
 .input-group .form-control:focus {
   box-shadow: none;
   background-color: black;
   color: white;
-  
 }
 
+/* Dropdown styling */
+.dropdown-menu .dropdown-item {
+  background-color: transparent;
+  color: white;
+}
 
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+  background-color: #dc3545 !important; /* Bootstrap's danger red */
+  color: white;
+}
+
+/* Full width search input on small screens */
 @media (max-width: 768px) {
   .search-input {
     width: 100%;
