@@ -10,12 +10,16 @@
     <title>Fishing Equipment {% block extra_title %}{% endblock %}</title>
 
     {% block corecss %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-    {% endblock %}
-
-    {% block corejs %}
-    <script src="https://kit.fontawesome.com/ce5ea65d4c.js" crossorigin="anonymous"></script>
+    {% endblock %} {% block corejs %}
+    <script
+      src="https://kit.fontawesome.com/ce5ea65d4c.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     {% endblock %}
   </head>
@@ -32,36 +36,105 @@
         <!-- Right: icons -->
         <div class="d-flex d-lg-none gap-3 align-items-center">
           <a href="#" class="text-white"><i class="fas fa-user"></i></a>
-          <a href="{% url 'view_cart' %}" class="text-white"><i class="fas fa-shopping-cart"></i></a>
+          <a href="{% url 'view_cart' %}" class="text-white"
+            ><i class="fas fa-shopping-cart"></i
+          ></a>
         </div>
 
         <!-- Collapsible content -->
-        <div class="collapse navbar-collapse justify-content-end" id="navbarMain">
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarMain"
+        >
           <!-- Center: search (hidden on mobile) -->
-          <form class="d-none d-lg-flex mx-auto w-50" action="{% url 'search' %}" method="GET">
+          <form
+            class="d-none d-lg-flex mx-auto w-50"
+            action="{% url 'search' %}"
+            method="GET"
+          >
             <div class="input-group w-100">
-              <input type="text" name="q" class="form-control rounded-start-pill bg-dark text-white border-white ps-3" placeholder="Search among 40 000 products" />
-              <button class="btn bg-danger text-white rounded-end-pill px-4" type="submit">
+              <input
+                type="text"
+                name="q"
+                class="form-control rounded-start-pill bg-dark text-white border-white ps-3"
+                placeholder="Search among 40 000 products"
+              />
+              <button
+                class="btn bg-danger text-white rounded-end-pill px-4"
+                type="submit"
+              >
                 <i class="fas fa-search"></i>
               </button>
             </div>
           </form>
 
           <!-- Right: icons desktop -->
-          <ul class="navbar-nav ms-auto d-none d-lg-flex flex-row gap-3 align-items-center">
-            <li class="nav-item"><a class="nav-link text-white" href="#"><i class="fas fa-user"></i></a></li>
-            <li class="nav-item"><a class="nav-link text-white" href="{% url 'view_cart' %}"><i class="fas fa-shopping-cart"></i></a></li>
+          <ul
+            class="navbar-nav ms-auto d-none d-lg-flex flex-row gap-3 align-items-center"
+          >
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'account_logout' %}">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+              </a>
+            </li>
+            {% else %}
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle text-white"
+                href="#"
+                id="userDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fas fa-user"></i>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end bg-dark border border-secondary"
+                aria-labelledby="userDropdown"
+              >
+                <li>
+                  <a
+                    class="dropdown-item text-white"
+                    href="{% url 'account_login' %}"
+                    >Log In</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item text-white"
+                    href="{% url 'account_signup' %}"
+                    >Register Account</a
+                  >
+                </li>
+              </ul>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'view_cart' %}">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
 
     <!-- Mobile search bar (shown only on small screens) -->
-    <div class="container mt-3 d-lg-none">
+    <div class="container mt-3 mb-4 d-lg-none">
       <form action="{% url 'search' %}" method="GET">
         <div class="input-group">
-          <input type="text" name="q" class="form-control rounded-start-pill bg-dark text-white ps-3" placeholder="Search among 40 000 products" />
-          <button class="btn bg-danger text-white rounded-end-pill px-4" type="submit">
+          <input
+            type="text"
+            name="q"
+            class="form-control rounded-start-pill bg-dark text-white ps-3"
+            placeholder="Search among 40 000 products"
+          />
+          <button
+            class="btn bg-danger text-white rounded-end-pill px-4"
+            type="submit"
+          >
             <i class="fas fa-search"></i>
           </button>
         </div>
@@ -70,29 +143,60 @@
 
     <!-- Free delivery banner -->
     {% if free_delivery_delta > 0 %}
-      <div id="delivery-banner" class="bg-danger text-white text-center mb-4 py-2">
-        Spend ${{ free_delivery_delta|floatformat:2 }} more for free delivery!
-      </div>
+    <div
+      id="delivery-banner"
+      class="bg-danger text-white text-center mb-4 py-2"
+    >
+      Spend ${{ free_delivery_delta|floatformat:2 }} more for free delivery!
+    </div>
     {% else %}
-      <div id="delivery-banner" class="bg-success text-white text-center mb-4 py-2">
-        🎉 You get free delivery!
-      </div>
+    <div
+      id="delivery-banner"
+      class="bg-success text-white text-center mb-4 py-2"
+    >
+      🎉 You get free delivery!
+    </div>
     {% endif %}
 
     <!-- Category buttons -->
     <div class="row text-center mb-4">
       <div class="col d-flex flex-wrap justify-content-center gap-2">
-        <a href="{% url 'all_products' %}" class="btn btn-outline-secondary">All Products</a>
-        <a href="{% url 'category_view' 'rods' %}" class="btn btn-outline-secondary">Rods</a>
-        <a href="{% url 'category_view' 'reels' %}" class="btn btn-outline-secondary">Reels</a>
-        <a href="{% url 'category_view' 'lines' %}" class="btn btn-outline-secondary">Lines</a>
-        <a href="{% url 'category_view' 'lures' %}" class="btn btn-outline-secondary">Lures</a>
-        <a href="{% url 'category_view' 'clothes' %}" class="btn btn-outline-secondary">Clothes</a>
-        <a href="{% url 'category_view' 'deals' %}" class="btn btn-outline-secondary">Deals</a>
+        <a href="{% url 'all_products' %}" class="btn btn-outline-secondary"
+          >All Products</a
+        >
+        <a
+          href="{% url 'category_view' 'rods' %}"
+          class="btn btn-outline-secondary"
+          >Rods</a
+        >
+        <a
+          href="{% url 'category_view' 'reels' %}"
+          class="btn btn-outline-secondary"
+          >Reels</a
+        >
+        <a
+          href="{% url 'category_view' 'lines' %}"
+          class="btn btn-outline-secondary"
+          >Lines</a
+        >
+        <a
+          href="{% url 'category_view' 'lures' %}"
+          class="btn btn-outline-secondary"
+          >Lures</a
+        >
+        <a
+          href="{% url 'category_view' 'clothes' %}"
+          class="btn btn-outline-secondary"
+          >Clothes</a
+        >
+        <a
+          href="{% url 'category_view' 'deals' %}"
+          class="btn btn-outline-secondary"
+          >Deals</a
+        >
       </div>
     </div>
-    {% block page_header %}
-    {% endblock %}
+    {% block page_header %} {% endblock %}
 
     <!-- Main content -->
     <main class="flex-fill">
@@ -104,11 +208,19 @@
       <div class="container text-center">
         <h4 class="fw-bold mb-3">Fishing Equipment</h4>
         <div class="mb-3">
-          <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
-          <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
-          <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="#" class="text-white me-3"
+            ><i class="fab fa-facebook fa-lg"></i
+          ></a>
+          <a href="#" class="text-white me-3"
+            ><i class="fab fa-instagram fa-lg"></i
+          ></a>
+          <a href="#" class="text-white"
+            ><i class="fab fa-twitter fa-lg"></i
+          ></a>
         </div>
-        <p class="mb-0 small">&copy; 2025 Fishing Equipment. All rights reserved.</p>
+        <p class="mb-0 small">
+          &copy; 2025 Fishing Equipment. All rights reserved.
+        </p>
       </div>
     </footer>
 
