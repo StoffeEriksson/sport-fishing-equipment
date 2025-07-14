@@ -42,9 +42,11 @@
                     <option value="{{ s }}" {% if item.size == s %}selected{% endif %}>{{ s }}</option>
                   {% endfor %}
                 </select>
+                <input type="hidden" name="original_size" value="{{ item.size }}">
               {% else %}
                 <span class="text-white">N/A</span>
                 <input type="hidden" name="size" value="">
+                <input type="hidden" name="original_size" value="">
               {% endif %}
           </td>
           <td>

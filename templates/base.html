@@ -97,16 +97,12 @@
                 <li>
                   <a
                     class="dropdown-item text-white"
-                    href="{% url 'account_login' %}"
-                    >Log In</a
-                  >
+                    href="{% url 'account_login' %}">Log In</a>
                 </li>
                 <li>
                   <a
                     class="dropdown-item text-white"
-                    href="{% url 'account_signup' %}"
-                    >Register Account</a
-                  >
+                    href="{% url 'account_signup' %}">Register Account</a>
                 </li>
               </ul>
             </li>
@@ -143,17 +139,11 @@
 
     <!-- Free delivery banner -->
     {% if free_delivery_delta > 0 %}
-    <div
-      id="delivery-banner"
-      class="bg-danger text-white text-center mb-4 py-2"
-    >
+    <div id="delivery-banner" class="bg-danger text-white text-center mb-4 py-2">
       Spend ${{ free_delivery_delta|floatformat:2 }} more for free delivery!
     </div>
     {% else %}
-    <div
-      id="delivery-banner"
-      class="bg-success text-white text-center mb-4 py-2"
-    >
+    <div id="delivery-banner" class="bg-success text-white text-center mb-4 py-2">
       🎉 You get free delivery!
     </div>
     {% endif %}
@@ -161,42 +151,29 @@
     <!-- Category buttons -->
     <div class="row text-center mb-4">
       <div class="col d-flex flex-wrap justify-content-center gap-2">
-        <a href="{% url 'all_products' %}" class="btn btn-outline-secondary"
-          >All Products</a
-        >
-        <a
-          href="{% url 'category_view' 'rods' %}"
-          class="btn btn-outline-secondary"
-          >Rods</a
-        >
-        <a
-          href="{% url 'category_view' 'reels' %}"
-          class="btn btn-outline-secondary"
-          >Reels</a
-        >
-        <a
-          href="{% url 'category_view' 'lines' %}"
-          class="btn btn-outline-secondary"
-          >Lines</a
-        >
-        <a
-          href="{% url 'category_view' 'lures' %}"
-          class="btn btn-outline-secondary"
-          >Lures</a
-        >
-        <a
-          href="{% url 'category_view' 'clothes' %}"
-          class="btn btn-outline-secondary"
-          >Clothes</a
-        >
-        <a
-          href="{% url 'category_view' 'deals' %}"
-          class="btn btn-outline-secondary"
-          >Deals</a
-        >
+        <a href="{% url 'all_products' %}" class="btn btn-outline-danger">All Products</a>
+        <a href="{% url 'category_view' 'rods' %}" class="btn btn-outline-danger">Rods</a>
+        <a href="{% url 'category_view' 'reels' %}" class="btn btn-outline-danger">Reels</a>
+        <a href="{% url 'category_view' 'lines' %}" class="btn btn-outline-danger">Lines</a>
+        <a href="{% url 'category_view' 'lures' %}" class="btn btn-outline-danger">Lures</a>
+        <a href="{% url 'category_view' 'clothes' %}" class="btn btn-outline-danger">Clothes</a>
+        <a href="{% url 'category_view' 'deals' %}" class="btn btn-outline-danger">Deals</a>
       </div>
     </div>
-    {% block page_header %} {% endblock %}
+
+    {% block page_header %}{% endblock %}
+
+    <!-- Flash messages -->
+    {% if messages %}
+      <div class="container mt-3">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
 
     <!-- Main content -->
     <main class="flex-fill">
@@ -208,15 +185,9 @@
       <div class="container text-center">
         <h4 class="fw-bold mb-3">Fishing Equipment</h4>
         <div class="mb-3">
-          <a href="#" class="text-white me-3"
-            ><i class="fab fa-facebook fa-lg"></i
-          ></a>
-          <a href="#" class="text-white me-3"
-            ><i class="fab fa-instagram fa-lg"></i
-          ></a>
-          <a href="#" class="text-white"
-            ><i class="fab fa-twitter fa-lg"></i
-          ></a>
+          <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
         </div>
         <p class="mb-0 small">
           &copy; 2025 Fishing Equipment. All rights reserved.
