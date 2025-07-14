@@ -68,6 +68,11 @@
     </table>
 
     <h4 class="text-end text-white">Total: ${{ total|floatformat:2 }}</h4>
+    <div class="d-flex justify-content-end mt-3">
+      <a href="{% url 'checkout' %}" class="btn btn-lg btn-danger px-5">
+        Proceed to Checkout <i class="fas fa-arrow-right ms-2"></i>
+      </a>
+    </div>
   {% else %}
     <p class="text-white">Your cart is empty.</p>
   {% endif %}

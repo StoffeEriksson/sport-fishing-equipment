@@ -46,6 +46,14 @@ img {
   color: white;
 }
 
+/* Social Links */
+.social-icon {
+  color: white;
+}
+.social-icon:hover {
+  color: #dc3545;
+}
+
 /* Full width search input on small screens */
 @media (max-width: 768px) {
   .search-input {
