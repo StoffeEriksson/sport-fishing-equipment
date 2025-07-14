@@ -87,6 +87,7 @@ def checkout(request):
         )
 
         order_form = OrderForm()
+        product_count = sum(item['quantity'] for item in cart.values())
 
     template = 'checkout/checkout.html'
     context = {
@@ -97,8 +98,9 @@ def checkout(request):
         'total': total,
         'delivery': delivery,
         'grand_total': grand_total,
+        'product_count': product_count,
     }
-
+    
     return render(request, template, context)
 
 
