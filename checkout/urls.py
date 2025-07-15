@@ -4,5 +4,5 @@ from .webhooks import webhook
 
 urlpatterns = [
     path('', views.checkout, name='checkout'),
-   
+    path('wh/', webhook, name='webhook'),
 ]
