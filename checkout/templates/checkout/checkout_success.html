@@ -1,0 +1,144 @@
+{% extends "base.html" %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}" />
+{% endblock %} {% block page_header %}
+<div class="container header-container">
+  <div class="row">
+    <div class="col"></div>
+  </div>
+</div>
+{% endblock %} {% block content %}
+<div class="overlay"></div>
+<div class="container mb-5">
+  <!-- Centrerad rubrik och bekräftelse -->
+  <div class="row justify-content-center text-center">
+    <div class="col-12 col-md-8">
+      <hr />
+      <h2 class="logo-font mb-4 text-danger">Order Complete</h2>
+      <hr />
+      <p class="text-white">
+        Thank you for your purchase! A confirmation email has been sent to
+        <strong>{{ order.email }}</strong>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Orderdetaljer -->
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+      <div
+        class="order-confirmation-wrapper p-3 border border-danger bg-dark text-light rounded"
+      >
+        <h5 class="text-danger mb-3">Order Details</h5>
+
+        <div class="row">
+          <div class="col-6">
+            <strong>Order Number:</strong>
+          </div>
+          <div class="col-6 text-right">{{ order.order_number }}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <strong>Date:</strong>
+          </div>
+          <div class="col-6 text-right">{{ order.date }}</div>
+        </div>
+
+        <hr class="bg-danger" />
+
+        {% for item in order.lineitems.all %}
+        <div class="row my-2 align-items-center">
+          <div class="col-3">
+            {% if item.product.image %}
+            <img
+              src="{{ item.product.image.url }}"
+              alt="{{ item.product.name }}"
+              class="img-fluid border border-secondary rounded"
+            />
+            {% else %}
+            <img
+              src="{{ MEDIA_URL }}noimage.png"
+              alt="No image"
+              class="img-fluid border border-secondary rounded"
+            />
+            {% endif %}
+          </div>
+          <div class="col-6">
+            <p class="mb-1 text-white font-weight-bold">
+              {{ item.product.name }}
+            </p>
+            {% if item.product_size %}
+            <p class="mb-0 text-white small">
+              Size: {{ item.product_size|upper }}
+            </p>
+            {% endif %}
+            <p class="mb-0 text-white small">Quantity: {{ item.quantity }}</p>
+          </div>
+          <div class="col-3 text-right">
+            <p class="mb-0 text-white">${{ item.product.price }}</p>
+          </div>
+        </div>
+        <hr class="bg-danger my-2" />
+        {% endfor %}
+
+        <hr class="bg-danger" />
+
+        <h6 class="text-danger mt-3">Delivery Information</h6>
+        <p class="mb-0">{{ order.full_name }}</p>
+        <p class="mb-0">{{ order.street_address1 }}</p>
+        {% if order.street_address2 %}
+        <p class="mb-0">{{ order.street_address2 }}</p>
+        {% endif %} {% if order.county %}
+        <p class="mb-0">{{ order.county }}</p>
+        {% endif %}
+        <p class="mb-0">{{ order.town_or_city }}</p>
+        {% if order.postcode %}
+        <p class="mb-0">{{ order.postcode }}</p>
+        {% endif %}
+        <p class="mb-0">{{ order.country }}</p>
+        <p class="mb-0">Phone: {{ order.phone_number }}</p>
+
+        <hr class="bg-danger" />
+
+        <div class="row">
+          <div class="col-6">
+            <strong>Order Total:</strong>
+          </div>
+          <div class="col-6 text-right">${{ order.order_total }}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <strong>Delivery:</strong>
+          </div>
+          <div class="col-6 text-right">${{ order.delivery_cost }}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <strong>Grand Total:</strong>
+          </div>
+          <div class="col-6 text-right">
+            <strong>${{ order.grand_total }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Länk till produkter -->
+  <div class="row justify-content-center mt-4">
+    <div class="col-auto">
+      <a
+        href="{% url 'home' %}"
+        class="btn btn-danger rounded-0"
+      >
+        
+        <span class="text-uppercase font-weight-bold"
+          >Return to home page!</span
+        >
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
