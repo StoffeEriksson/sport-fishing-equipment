@@ -3,10 +3,8 @@ from django.contrib import messages
 from products.models import Product
 from .models import CartItem
 from decimal import Decimal
-
-
-
-
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 
 def view_cart(request):
@@ -42,11 +40,8 @@ def view_cart(request):
     })
 
 
+@require_POST
 def add_to_cart(request, product_id):
-    """
-    Add a product to the cart (authenticated users or session).
-    Replaces quantity if item already exists.
-    """
     product = get_object_or_404(Product, pk=product_id)
     quantity = int(request.POST.get('quantity', 1))
     size = request.POST.get('size') or None
@@ -59,6 +54,8 @@ def add_to_cart(request, product_id):
         )
         cart_item.quantity = quantity
         cart_item.save()
+
+        cart_items = CartItem.objects.filter(user=request.user)
     else:
         cart = request.session.get('cart', {})
         key = f"{product_id}_{size}" if size else str(product_id)
@@ -69,7 +66,46 @@ def add_to_cart(request, product_id):
         }
         request.session['cart'] = cart
 
-    messages.success(request, f'{product.name} added to your cart.')
+        cart_items = []
+        for item in cart.values():
+            p = get_object_or_404(Product, pk=item['product_id'])
+            cart_items.append({
+                'product': p,
+                'quantity': item['quantity'],
+                'size': item.get('size')
+            })
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        items = []
+        total = Decimal('0.00')
+
+        for item in cart_items:
+            if request.user.is_authenticated:
+                p = item.product
+                q = item.quantity
+                s = item.size
+            else:
+                p = item['product']
+                q = item['quantity']
+                s = item['size']
+
+            subtotal = p.price * q
+            total += subtotal
+
+            items.append({
+                'name': p.name,
+                'image_url': p.image.url if p.image else '',
+                'quantity': q,
+                'size': s,
+                'price': f"{p.price:.2f}"
+            })
+
+        return JsonResponse({
+            'items': items,
+            'total': f"{total:.2f}"
+        })
+
+    messages.success(request, f"{product.name} added to your cart.")
     return redirect('view_cart')
 
 
@@ -176,7 +212,6 @@ def remove_from_cart(request, product_id):
         request.session['cart'] = cart
 
     return redirect('view_cart')
-
 
 
 def clear_cart(request):
