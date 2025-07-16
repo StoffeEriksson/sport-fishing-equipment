@@ -2,13 +2,19 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from products.models import Product
 from .models import CartItem
+from decimal import Decimal
+
+
+
+
+
 
 def view_cart(request):
     """
     Display all products in the shopping cart, including total cost.
     """
     cart_items = []
-    total = 0
+    total = Decimal('0.00')
 
     if request.user.is_authenticated:
         cart_items = CartItem.objects.filter(user=request.user)
@@ -18,7 +24,7 @@ def view_cart(request):
         for key, item in cart.items():
             product = get_object_or_404(Product, pk=item['product_id'])
             quantity = item['quantity']
-            size = item.get('size')
+            size = item.get('size') or None
             subtotal = product.price * quantity
             total += subtotal
             cart_items.append({
@@ -38,42 +44,32 @@ def view_cart(request):
 
 def add_to_cart(request, product_id):
     """
-    Add a product to the shopping cart.
-    If the user is logged in, store in the database.
-    If guest, store in session.
+    Add a product to the cart (authenticated users or session).
+    Replaces quantity if item already exists.
     """
     product = get_object_or_404(Product, pk=product_id)
     quantity = int(request.POST.get('quantity', 1))
-    size = request.POST.get('size', None)
-
-    # Validate: size is required for clothing
-    if product.category.name == "clothes" and not size:
-        messages.error(request, "Please select a size for this clothing item.")
-        return redirect(request.META.get('HTTP_REFERER', 'product_detail'))
+    size = request.POST.get('size') or None
 
     if request.user.is_authenticated:
-        cart_item, created = CartItem.objects.get_or_create(
+        cart_item, _ = CartItem.objects.get_or_create(
             user=request.user,
             product=product,
             size=size
         )
-        cart_item.quantity += quantity
+        cart_item.quantity = quantity
         cart_item.save()
     else:
         cart = request.session.get('cart', {})
-        key = f"{product.id}_{size}" if size else str(product.id)
-
-        if key in cart:
-            cart[key]['quantity'] += quantity
-        else:
-            cart[key] = {
-                'product_id': product.id,
-                'quantity': quantity,
-                'size': size,
-            }
-
+        key = f"{product_id}_{size}" if size else str(product_id)
+        cart[key] = {
+            'product_id': product.id,
+            'quantity': quantity,
+            'size': size,
+        }
         request.session['cart'] = cart
 
+    messages.success(request, f'{product.name} added to your cart.')
     return redirect('view_cart')
 
 
@@ -90,7 +86,7 @@ def update_cart(request, product_id):
         cart_item = CartItem.objects.filter(
             user=request.user,
             product_id=product_id,
-            size=original_size if original_size else None
+            size=original_size
         ).first()
 
         if cart_item:
@@ -143,23 +139,45 @@ def update_cart(request, product_id):
 
     return redirect('view_cart')
 
+
 def remove_from_cart(request, product_id):
     """
     Remove a single product (with optional size) from the cart.
     Works for both authenticated users and guests.
     """
-    size = request.POST.get('size', None)
+    size = request.POST.get('size')
+
+    # Normalize to Python None if the value is empty string or the string 'None'
+    if not size or size == 'None':
+        size = None
+
+    print(f"Attempting to remove product_id={product_id}, size={size!r}")
 
     if request.user.is_authenticated:
-        CartItem.objects.filter(user=request.user, product_id=product_id, size=size).delete()
+        if size is None:
+            deleted, _ = CartItem.objects.filter(
+                user=request.user,
+                product_id=product_id,
+                size__isnull=True
+            ).delete()
+        else:
+            deleted, _ = CartItem.objects.filter(
+                user=request.user,
+                product_id=product_id,
+                size=size
+            ).delete()
+
+        print(f"Authenticated user: Deleted {deleted} item(s)")
     else:
         cart = request.session.get('cart', {})
-        key_with_size = f"{product_id}_{size}" if size else str(product_id)
-        if key_with_size in cart:
-            del cart[key_with_size]
+        key = f"{product_id}_{size}" if size else str(product_id)
+        if key in cart:
+            del cart[key]
         request.session['cart'] = cart
 
     return redirect('view_cart')
+
+
 
 def clear_cart(request):
     """
