@@ -22,7 +22,11 @@
 
       <p>Rating: {{ product.rating }}</p>
 
-      <form method="post" action="{% url 'add_to_cart' product.id %}">
+      <!-- AJAX Add to Cart Form -->
+      <form method="post"
+            class="ajax-add-to-cart"
+            data-product-id="{{ product.id }}"
+            action="{% url 'add_to_cart' product.id %}">
         {% csrf_token %}
 
         {% if product.category.name == "clothes" %}
@@ -41,7 +45,8 @@
 
         <div class="mb-3">
           <label for="quantity" class="form-label">Quantity:</label>
-          <input type="number" name="quantity" value="1" min="1" class="form-control w-25 d-inline" />
+          <input type="number" name="quantity" value="1" min="1"
+                 class="form-control w-25 d-inline" />
         </div>
 
         <button type="submit" class="btn btn-danger">Add to cart</button>
@@ -67,14 +72,8 @@
           <p class="fw-bold">${{ item.price }}</p>
         </div>
       </a>
-      <div class="card-footer bg-dark border-0 mt-auto">
-        <form method="post" action="{% url 'add_to_cart' item.pk %}">
-          {% csrf_token %}
-        </form>
-      </div>
     </div>
   </div>
   {% endfor %}
 </div>
-
 {% endblock %}
