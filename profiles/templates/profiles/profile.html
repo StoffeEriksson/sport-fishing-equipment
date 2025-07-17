@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block delivery_banner %}{% endblock %}
+{% block category_buttons %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-3">
+    <div class="list-group">
+      <a href="{% url 'user_profile' %}" class="list-group-item list-group-item-action bg-dark text-white">Account Details</a>
+      <a href="" class="list-group-item list-group-item-action bg-dark text-white">Recent Orders</a>
+      <a href="" class="list-group-item list-group-item-action bg-dark text-white">Liked Products</a>
+      <a href="" class="list-group-item list-group-item-action bg-dark text-white">Comments</a>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <h2 class="mb-4">Your Profile</h2>
+    <form method="POST" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-danger">Update</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

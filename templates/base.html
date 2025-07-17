@@ -45,12 +45,74 @@
           Fishing Equipment
         </a>
 
-        <!-- Right: icons -->
+        <!-- Right: icons (mobile) -->
         <div class="d-flex d-lg-none gap-3 align-items-center">
-          <a href="#" class="text-white"><i class="fas fa-user"></i></a>
-          <a href="{% url 'view_cart' %}" class="text-white"
-            ><i class="fas fa-shopping-cart"></i
-          ></a>
+          {% if user.is_authenticated %}
+          <div class="dropdown">
+            <a
+              class="text-white dropdown-toggle"
+              href="#"
+              id="mobileAccountDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end bg-dark border border-secondary"
+              aria-labelledby="mobileAccountDropdown"
+            >
+              <li>
+                <a
+                  class="dropdown-item text-white"
+                  href="{% url 'user_profile' %}"
+                  >Account</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item text-white"
+                  href="{% url 'account_logout' %}"
+                  >Log Out</a
+                >
+              </li>
+            </ul>
+          </div>
+          {% else %}
+          <div class="dropdown">
+            <a
+              class="text-white dropdown-toggle"
+              href="#"
+              id="mobileGuestDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end bg-dark border border-secondary"
+              aria-labelledby="mobileGuestDropdown"
+            >
+              <li>
+                <a
+                  class="dropdown-item text-white"
+                  href="{% url 'account_login' %}"
+                  >Log In</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item text-white"
+                  href="{% url 'account_signup' %}"
+                  >Register</a
+                >
+              </li>
+            </ul>
+          </div>
+          {% endif %}
+          <a href="{% url 'view_cart' %}" class="text-white">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
         </div>
 
         <!-- Collapsible content -->
@@ -85,11 +147,38 @@
             class="navbar-nav ms-auto d-none d-lg-flex flex-row gap-3 align-items-center"
           >
             {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'account_logout' %}">
-                <i class="fas fa-sign-out-alt"></i> Log Out
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle text-white"
+                href="#"
+                id="accountDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fas fa-user"></i>
               </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end bg-dark border border-secondary"
+                aria-labelledby="accountDropdown"
+              >
+                <li>
+                  <a
+                    class="dropdown-item text-white"
+                    href="{% url 'user_profile' %}"
+                    >Account</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item text-white"
+                    href="{% url 'account_logout' %}"
+                    >Log Out</a
+                  >
+                </li>
+              </ul>
             </li>
+
             {% else %}
             <li class="nav-item dropdown">
               <a
@@ -154,60 +243,63 @@
     </div>
 
     <!-- Free delivery banner -->
-    {% if free_delivery_delta > 0 %}
-    <div
-      id="delivery-banner"
-      class="bg-danger text-white text-center mb-4 py-2"
-    >
-      Spend ${{ free_delivery_delta|floatformat:2 }} more for free delivery!
-    </div>
-    {% else %}
-    <div
-      id="delivery-banner"
-      class="bg-success text-white text-center mb-4 py-2"
-    >
-      🎉 You get free delivery!
-    </div>
-    {% endif %}
-
-    <!-- Category buttons -->
-    <div class="row text-center mb-4">
-      <div class="col d-flex flex-wrap justify-content-center gap-2">
-        <a href="{% url 'all_products' %}" class="btn btn-outline-danger"
-          >All Products</a
-        >
-        <a
-          href="{% url 'category_view' 'rods' %}"
-          class="btn btn-outline-danger"
-          >Rods</a
-        >
-        <a
-          href="{% url 'category_view' 'reels' %}"
-          class="btn btn-outline-danger"
-          >Reels</a
-        >
-        <a
-          href="{% url 'category_view' 'lines' %}"
-          class="btn btn-outline-danger"
-          >Lines</a
-        >
-        <a
-          href="{% url 'category_view' 'lures' %}"
-          class="btn btn-outline-danger"
-          >Lures</a
-        >
-        <a
-          href="{% url 'category_view' 'clothes' %}"
-          class="btn btn-outline-danger"
-          >Clothes</a
-        >
-        <a
-          href="{% url 'category_view' 'deals' %}"
-          class="btn btn-outline-danger"
-          >Deals</a
-        >
+    {% block delivery_banner %}
+      {% if free_delivery_delta > 0 %}
+      <div
+        id="delivery-banner"
+        class="bg-danger text-white text-center mb-4 py-2"
+      >
+        Spend ${{ free_delivery_delta|floatformat:2 }} more for free delivery!
       </div>
-    </div>
+      {% else %}
+      <div
+        id="delivery-banner"
+        class="bg-success text-white text-center mb-4 py-2"
+      >
+        🎉 You get free delivery!
+      </div>
+      {% endif %}
+    {% endblock %}
+    {% block category_buttons %}
+      <!-- Category buttons -->
+      <div class="row text-center mb-4">
+        <div class="col d-flex flex-wrap justify-content-center gap-2">
+          <a href="{% url 'all_products' %}" class="btn btn-outline-danger"
+            >All Products</a
+          >
+          <a
+            href="{% url 'category_view' 'rods' %}"
+            class="btn btn-outline-danger"
+            >Rods</a
+          >
+          <a
+            href="{% url 'category_view' 'reels' %}"
+            class="btn btn-outline-danger"
+            >Reels</a
+          >
+          <a
+            href="{% url 'category_view' 'lines' %}"
+            class="btn btn-outline-danger"
+            >Lines</a
+          >
+          <a
+            href="{% url 'category_view' 'lures' %}"
+            class="btn btn-outline-danger"
+            >Lures</a
+          >
+          <a
+            href="{% url 'category_view' 'clothes' %}"
+            class="btn btn-outline-danger"
+            >Clothes</a
+          >
+          <a
+            href="{% url 'category_view' 'deals' %}"
+            class="btn btn-outline-danger"
+            >Deals</a
+          >
+        </div>
+      </div>
+    {% endblock %}
 
     {% block page_header %}{% endblock %}
 
