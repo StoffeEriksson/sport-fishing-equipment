@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block delivery_banner %}
 {% endblock %}
 {% block category_buttons %}
@@ -13,7 +14,7 @@
         >Account Details</a
       >
       <a
-        href=""
+        href="{% url 'order_history' %}"
         class="list-group-item list-group-item-action bg-dark text-white"
         >Recent Orders</a
       >

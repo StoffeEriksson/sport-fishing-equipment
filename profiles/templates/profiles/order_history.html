@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block delivery_banner %}
+{% endblock %}
+{% block category_buttons %}
+{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3">
+      <div class="list-group">
+        <a
+          href="{% url 'user_profile' %}"
+          class="list-group-item list-group-item-action bg-dark text-white"
+        >
+          Account Details
+        </a>
+        <a
+          href="{% url 'order_history' %}"
+          class="list-group-item list-group-item-action bg-dark text-white"
+        >
+          Recent Orders
+        </a>
+        <a
+          href="#"
+          class="list-group-item list-group-item-action bg-dark text-white"
+          >Liked Products</a
+        >
+        <a
+          href="#"
+          class="list-group-item list-group-item-action bg-dark text-white"
+          >Comments</a
+        >
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+      <div class="border border-danger p-4 rounded" style="max-width: 600px">
+        <h2 class="mb-4">Order History</h2>
+        {% if orders %}
+        <ul class="list-group" id="order-list">
+          {% for order in orders %}
+          <li
+            class="list-group-item bg-dark text-white mb-2 order-item {% if forloop.counter > 5 %}d-none{% endif %}"
+          >
+            <strong>Order Number:</strong> {{ order.order_number }}<br />
+            <strong>Date:</strong> {{ order.date|date:"Y-m-d H:i" }}<br />
+            <strong>Total:</strong> ${{ order.grand_total|floatformat:2 }}<br />
+            <a
+              href="{% url 'order_detail' order.order_number %}"
+              class="btn btn-sm btn-outline-light mt-2"
+              >View Details</a
+            >
+          </li>
+          {% endfor %}
+        </ul>
+
+        {% if orders|length > 5 %}
+        <div class="text-center mt-3">
+          <button id="view-more-btn" class="btn btn-danger btn-sm">View More</button>
+          <button id="view-less-btn" class="btn btn-danger btn-sm d-none">View Less</button>
+        </div>
+        {% endif %} {% else %}
+        <p>You haven't placed any orders yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const viewMoreBtn = document.getElementById("view-more-btn");
+    const viewLessBtn = document.getElementById("view-less-btn");
+    const hiddenOrders = document.querySelectorAll(".order-item.d-none");
+
+    viewMoreBtn?.addEventListener("click", function () {
+      document.querySelectorAll(".order-item.d-none").forEach(item => {
+        item.classList.remove("d-none");
+      });
+      viewMoreBtn.classList.add("d-none");
+      viewLessBtn.classList.remove("d-none");
+    });
+
+    viewLessBtn?.addEventListener("click", function () {
+      let allOrders = document.querySelectorAll(".order-item");
+      allOrders.forEach((item, index) => {
+        if (index >= 5) {
+          item.classList.add("d-none");
+        }
+      });
+      viewMoreBtn.classList.remove("d-none");
+      viewLessBtn.classList.add("d-none");
+    });
+  });
+</script>
+
+
+{% endblock %}
