@@ -37,12 +37,13 @@ def cache_checkout_data(request):
 
 def checkout(request):
     """
-    Checkout view:
-    - Loads cart from DB or session
-    - Calculates totals and delivery cost (USD)
-    - Handles order submission and Stripe payment
+    Handles checkout:
+    - Builds the cart (from DB for authenticated users or session for guests)
+    - Calculates totals and delivery cost
+    - Creates Stripe PaymentIntent
+    - Pre-fills the form if user has a profile
+    - Saves delivery info to UserProfile if requested
     """
-    # Build cart from DB (authenticated) or session (guest)
     if request.user.is_authenticated:
         db_items = CartItem.objects.filter(user=request.user)
         if not db_items.exists():
@@ -76,14 +77,14 @@ def checkout(request):
             'size': size,
         })
 
-    # Delivery cost: 10% fee if total under $50
+    # Add 10% delivery fee if under $50
     delivery = Decimal('0.00')
     if total < Decimal('50.00'):
         delivery = total * Decimal('0.10')
 
     grand_total = total + delivery
 
-    # Handle POST (form submission)
+    # Handle form POST (submitting order)
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -95,7 +96,7 @@ def checkout(request):
             order.grand_total = grand_total
             order.save()
 
-            # Save line items
+            # Create order line items
             for item in cart_items:
                 OrderLineItem.objects.create(
                     order=order,
@@ -103,6 +104,19 @@ def checkout(request):
                     quantity=item['quantity'],
                     product_size=item['size'],
                 )
+
+            # Save delivery info to profile if user chose to
+            if request.user.is_authenticated and 'save-info' in request.POST:
+                profile = request.user.userprofile
+                profile.phone_number = form.cleaned_data['phone_number']
+                profile.country = form.cleaned_data['country']
+                profile.postcode = form.cleaned_data['postcode']
+                profile.city = form.cleaned_data['town_or_city']
+                profile.street_address1 = form.cleaned_data['street_address1']
+                profile.street_address2 = form.cleaned_data['street_address2']
+                profile.county = form.cleaned_data['county']
+                profile.save()
+                messages.success(request, "Your delivery information has been saved.")
 
             # Clear cart
             if request.user.is_authenticated:
@@ -114,9 +128,28 @@ def checkout(request):
         else:
             messages.error(request, "There was an error with your form. Please check your details.")
     else:
-        form = OrderForm()
+        # GET: Display form with pre-filled data from profile
+        if request.user.is_authenticated:
+            try:
+                profile = request.user.userprofile
+                initial_data = {
+                    'full_name': request.user.get_full_name(),
+                    'email': request.user.email,
+                    'phone_number': profile.phone_number,
+                    'country': profile.country,
+                    'postcode': profile.postcode,
+                    'town_or_city': profile.city,
+                    'street_address1': profile.street_address1,
+                    'street_address2': profile.street_address2,
+                    'county': profile.county,
+                }
+                form = OrderForm(initial=initial_data)
+            except UserProfile.DoesNotExist:
+                form = OrderForm()
+        else:
+            form = OrderForm()
 
-    # Create Stripe PaymentIntent (Stripe expects cents)
+    # Create Stripe PaymentIntent
     intent = stripe.PaymentIntent.create(
         amount=int(grand_total * 100),
         currency='usd',
@@ -134,6 +167,7 @@ def checkout(request):
     }
 
     return render(request, 'checkout/checkout.html', context)
+
 
 
 def checkout_success(request, order_number):

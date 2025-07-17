@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import UserProfile
 from .forms import UserProfileForm
 from checkout.models import Order
@@ -30,3 +30,13 @@ def profile_view(request):
 def order_history(request):
     orders = Order.objects.filter(user=request.user).order_by('-date')
     return render(request, 'profiles/order_history.html', {'orders': orders})
+
+
+@login_required
+def order_detail(request, order_number):
+    """
+    Display a single past order in detail.
+    Only accessible to the user who owns the order.
+    """
+    order = get_object_or_404(Order, order_number=order_number, user=request.user)
+    return render(request, 'profiles/order_detail.html', {'order': order})
