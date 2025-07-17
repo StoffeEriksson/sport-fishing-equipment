@@ -6,7 +6,7 @@
   <h1 class="text-white">All Products</h1>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
     {% for product in products %}
-    <div class="col-md-4 mb-4">
+    <div id="card" class="col-md-4 mb-4">
       <a href="{% url 'product_detail' product.pk %}" class="text-decoration-none text-dark">
         <div class="card h-100">
           {% if product.image %}
