@@ -89,3 +89,32 @@ document.addEventListener('DOMContentLoaded', function () {
     popup.classList.remove('show');
   };
 });
+
+// hides and showa comment form when leaving a comment 
+document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.getElementById('toggle-comment-form');
+    const form = document.getElementById('comment-form-container');
+    const icon = document.getElementById('toggle-icon');
+
+    toggle.addEventListener('click', function () {
+      form.classList.toggle('d-none');
+      icon.classList.toggle('fa-chevron-down');
+      icon.classList.toggle('fa-chevron-up');
+    });
+  });
+
+  // Hides and shows left comments by users
+  document.addEventListener('DOMContentLoaded', () => {
+  const toggle   = document.getElementById('toggle-comment-list');
+  const list     = document.getElementById('comment-list');
+  const icon     = document.getElementById('comment-list-icon');
+
+  if (toggle && list) {
+    toggle.addEventListener('click', () => {
+      list.classList.toggle('d-none');
+      icon.classList.toggle('fa-chevron-down');
+      icon.classList.toggle('fa-chevron-up');
+    });
+  }
+});
+

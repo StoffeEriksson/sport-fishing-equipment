@@ -137,6 +137,13 @@ img {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
+/* Hovereffect for rating stars */
+form button i:hover,
+form button:hover ~ button i {
+  filter: opacity(0.6);
+  cursor: pointer;
+}
+
 /* Full width search input on small screens */
 @media (max-width: 768px) {
   .search-input {
