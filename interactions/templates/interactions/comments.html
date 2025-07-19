@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block delivery_banner %}{% endblock %}
+{% block category_buttons %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3">
+      <div class="list-group">
+        <a href="{% url 'user_profile' %}" class="list-group-item list-group-item-action bg-dark text-white">Account Details</a>
+        <a href="{% url 'order_history' %}" class="list-group-item list-group-item-action bg-dark text-white">Recent Orders</a>
+        <a href="{% url 'liked_products' %}" class="list-group-item list-group-item-action bg-dark text-white">Liked Products</a>
+        <a href="{% url 'user_comments' %}" class="list-group-item list-group-item-action bg-danger text-white fw-bold">Comments</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+      <div class="border border-danger p-4 rounded">
+        <h2 class="mb-4">Your Comments</h2>
+        {% if comments %}
+          <ul class="list-group">
+            {% for comment in comments %}
+              <li class="list-group-item bg-dark text-white mb-2">
+                <strong>Product:</strong> <a href="{% url 'product_detail' comment.product.id %}" class="text-white">{{ comment.product.name }}</a><br>
+                <strong>Date:</strong> {{ comment.created_at|date:"Y-m-d H:i" }}<br>
+                <strong>Comment:</strong> {{ comment.content }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>You haven't left any comments yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

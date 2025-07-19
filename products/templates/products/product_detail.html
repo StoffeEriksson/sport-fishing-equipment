@@ -17,7 +17,7 @@
       <!-- Like button (heart icon) -->
       <form method="post" action="{% url 'like_product' product.id %}"
             class="position-absolute"
-            style="top: 15px; right: 15px; z-index: 10;">
+            style="top: 5px; right: 18px; z-index: 10;">
         {% csrf_token %}
         <button type="submit" class="btn btn-sm p-0 border-0 bg-transparent">
           {% if user_like %}
