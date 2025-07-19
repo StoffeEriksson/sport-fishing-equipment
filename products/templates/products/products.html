@@ -1,26 +1,54 @@
 {% extends "base.html" %}
 {% load static %}
+{% load rating_tags %}
 
 {% block content %}
 <div class="container mt-4">
   <h1 class="text-white">All Products</h1>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-    {% for product in products %}
-    <div id="card" class="col-md-4 mb-4">
-      <a href="{% url 'product_detail' product.pk %}" class="text-decoration-none text-dark">
-        <div class="card h-100">
-          {% if product.image %}
-          <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text">{{ product.description|truncatewords:20 }}</p>
-            <p class="card-text fw-bold">${{ product.price }}</p>
+
+  {% if products %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      {% for product in products %}
+        <div class="col">
+          <div class="card h-100 bg-dark text-white">
+
+            {# ─── Product image (clickable) ─── #}
+            {% if product.image %}
+              <a href="{% url 'product_detail' product.pk %}">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+              </a>
+            {% endif %}
+
+            {# ─── Card body: flex column so mt-auto pushes rating to the bottom ─── #}
+            <div class="card-body d-flex flex-column h-100">
+
+              {# Product title / description / price (all clickable as one link) #}
+              <a href="{% url 'product_detail' product.pk %}" class="text-decoration-none text-white">
+                <h5 class="card-title">{{ product.name|truncatechars:40 }}</h5>
+                <p class="card-text">{{ product.description|truncatewords:15 }}</p>
+                <p class="fw-bold mb-1">${{ product.price }}</p>
+              </a>
+
+              {# ─── Rating block fixed at bottom ─── #}
+              <div class="mt-auto">
+                {% with avg=product.ratings.all|average_rating %}
+                  {% for i in "12345" %}
+                    {% if i|to_int <= avg %}
+                      <i class="fas fa-star text-warning"></i>
+                    {% else %}
+                      <i class="far fa-star text-warning"></i>
+                    {% endif %}
+                  {% endfor %}
+                  <small class="text-muted">({{ product.ratings.count }})</small>
+                {% endwith %}
+              </div>
+            </div>
           </div>
         </div>
-      </a>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
+  {% else %}
+    <p class="text-white">No products found.</p>
+  {% endif %}
 </div>
 {% endblock %}
