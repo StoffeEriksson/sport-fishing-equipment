@@ -62,6 +62,13 @@ def liked_products(request):
 
 
 @login_required
+def remove_like(request, product_id):
+    like = get_object_or_404(Like, user=request.user, product_id=product_id)
+    like.delete()
+    return redirect('liked_products')
+
+
+@login_required
 def user_comments(request):
     comments = Comment.objects.filter(user=request.user).select_related('product')
     return render(request, 'interactions/comments.html', {'comments': comments})
