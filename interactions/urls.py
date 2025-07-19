@@ -5,4 +5,6 @@ urlpatterns = [
     path('like/<int:product_id>/', views.like_product, name='like_product'),
     path('rate/<int:product_id>/', views.submit_rating, name='submit_rating'),
     path('comment/<int:product_id>/', views.submit_comment, name='submit_comment'),
+    path('liked/', views.liked_products, name='liked_products'),
+    path('comments/', views.user_comments, name='user_comments'),
 ]

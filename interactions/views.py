@@ -50,3 +50,18 @@ def like_product(request, product_id):
     if not created:
         like.delete()  # Toggle like off
     return redirect('product_detail', product.id)
+
+
+@login_required
+def liked_products(request):
+    liked = Like.objects.filter(user=request.user).select_related('product')
+    liked_products = [like.product for like in liked]
+    return render(request, 'interactions/liked_products.html', {
+        'liked_products': liked_products
+    })
+
+
+@login_required
+def user_comments(request):
+    comments = Comment.objects.filter(user=request.user).select_related('product')
+    return render(request, 'interactions/comments.html', {'comments': comments})
