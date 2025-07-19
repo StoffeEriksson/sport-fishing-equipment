@@ -1,1 +1,1 @@
-web: gunicorn sport-fishing-equipment.wsgi:application
+web: gunicorn fishingshop.wsgi:application
