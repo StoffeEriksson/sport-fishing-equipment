@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load rating_tags %}
 
 {% block content %}
 <div class="container mt-4">
@@ -16,31 +17,49 @@
   </div>
 
   <!-- DEALS-KORT -->
- <div class="row">
-  {% for product in deals %}
-    <div class="col-md-3 mb-4">
-      <a href="{% url 'product_detail' product.pk %}" class="text-decoration-none text-white">
-        <div class="card h-100 shadow-sm">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    {% for product in deals %}
+      <div class="col">
+        <div class="card h-100 bg-dark text-white">
+
           {% if product.image %}
-            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            <a href="{% url 'product_detail' product.pk %}">
+              <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            </a>
           {% endif %}
+
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title">{{ product.name|truncatechars:40 }}</h5>
-            <p class="card-text">{{ product.description|truncatewords:15 }}</p>
-            {% if product.original_price %}
-              <p><del>${{ product.original_price }}</del> <strong>${{ product.price }}</strong></p>
-            {% else %}
-              <p><strong>${{ product.price }}</strong></p>
-            {% endif %}
+            <a href="{% url 'product_detail' product.pk %}" class="text-decoration-none text-white">
+              <h5 class="card-title">{{ product.name|truncatechars:40 }}</h5>
+              <p class="card-text">{{ product.description|truncatewords:15 }}</p>
+              {% if product.original_price %}
+                <p><del>${{ product.original_price }}</del> <strong>${{ product.price }}</strong></p>
+              {% else %}
+                <p><strong>${{ product.price }}</strong></p>
+              {% endif %}
+            </a>
+
+            <!-- Rating alltid i botten -->
+            <div class="mt-auto">
+              {% with avg=product.ratings.all|average_rating %}
+                <div>
+                  {% for i in "12345" %}
+                    {% if i|to_int <= avg %}
+                      <i class="fas fa-star text-warning"></i>
+                    {% else %}
+                      <i class="far fa-star text-warning"></i>
+                    {% endif %}
+                  {% endfor %}
+                  <small class="text-muted">({{ product.ratings.count }})</small>
+                </div>
+              {% endwith %}
+            </div>
           </div>
         </div>
-      </a>
-    </div>
-  {% empty %}
-    <p>No deals available right now.</p>
-  {% endfor %}
-</div>
-
+      </div>
+    {% empty %}
+      <p class="text-white">No deals available right now.</p>
+    {% endfor %}
   </div>
 
 </div>

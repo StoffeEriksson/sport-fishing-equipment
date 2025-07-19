@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block delivery_banner %}{% endblock %}
@@ -21,21 +21,59 @@
     <div class="col-md-9">
       <div class="border border-danger p-4 rounded">
         <h2 class="mb-4">Your Comments</h2>
+
         {% if comments %}
-          <ul class="list-group">
-            {% for comment in comments %}
-              <li class="list-group-item bg-dark text-white mb-2">
-                <strong>Product:</strong> <a href="{% url 'product_detail' comment.product.id %}" class="text-white">{{ comment.product.name }}</a><br>
-                <strong>Date:</strong> {{ comment.created_at|date:"Y-m-d H:i" }}<br>
-                <strong>Comment:</strong> {{ comment.content }}
-              </li>
-            {% endfor %}
-          </ul>
+          {% for comment in comments %}
+          <div class="mb-3 p-3 border border-secondary rounded bg-dark text-white" id="comment-box-{{ comment.id }}">
+            <strong>Product:</strong>
+            <a href="{% url 'product_detail' comment.product.id %}" class="text-white">
+              {{ comment.product.name }}
+            </a>
+            <span class="text-muted small float-end">
+              {{ comment.created_at|date:"Y‑m‑d H:i" }}
+            </span>
+
+            <!-- Displayed comment -->
+            <p class="mt-2 mb-2" id="comment-text-{{ comment.id }}">{{ comment.content }}</p>
+
+            <!-- Hidden edit form -->
+            <form method="post" action="{% url 'edit_comment' comment.id %}" class="d-none" id="edit-form-{{ comment.id }}">
+              {% csrf_token %}
+              <textarea name="content" class="form-control mb-2">{{ comment.content }}</textarea>
+              <button type="submit" class="btn btn-success btn-sm">Save</button>
+              <button type="button" class="btn btn-secondary btn-sm ms-1" onclick="toggleEdit({{ comment.id }}, false)">Cancel</button>
+            </form>
+
+            <!-- Buttons -->
+            <button class="btn btn-outline-warning btn-sm" onclick="toggleEdit({{ comment.id }}, true)">Edit</button>
+
+            <form action="{% url 'delete_comment' comment.id %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger btn-sm ms-2" title="Delete comment">&times;</button>
+            </form>
+          </div>
+          {% endfor %}
         {% else %}
-          <p>You haven't left any comments yet.</p>
+          <p>You haven’t left any comments yet.</p>
         {% endif %}
       </div>
     </div>
   </div>
 </div>
+
+<script>
+// Show/hide the inline edit form for a comment
+function toggleEdit(commentId, show) {
+  const text = document.getElementById('comment-text-' + commentId);
+  const form = document.getElementById('edit-form-' + commentId);
+
+  if (show) {
+    text.classList.add('d-none');
+    form.classList.remove('d-none');
+  } else {
+    form.classList.add('d-none');
+    text.classList.remove('d-none');
+  }
+}
+</script>
 {% endblock %}
