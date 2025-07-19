@@ -35,7 +35,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'sport-fishing-equipment-e32e8727b2d9.herokuapp.com',
+    'sport-fishing-equipment-247864a1d871.herokuapp.com',
 ]
 
 
