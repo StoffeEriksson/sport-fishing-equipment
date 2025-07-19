@@ -1,0 +1,1 @@
+web: gunicorn sport-fishing-equipment.wsgi:application
