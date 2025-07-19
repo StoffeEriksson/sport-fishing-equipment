@@ -32,7 +32,13 @@
                   <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">${{ product.price }}</p>
-                    <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-light btn-sm">View</a>
+                    <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-danger btn-sm">View</a>
+                    <form action="{% url 'remove_like' product.id %}" method="post" style="display:inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-outline-danger btn-sm ms-2" title="Remove Like">
+                        &times;
+                      </button>
+                    </form>
                   </div>
                 </div>
               </div>

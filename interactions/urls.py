@@ -7,4 +7,5 @@ urlpatterns = [
     path('comment/<int:product_id>/', views.submit_comment, name='submit_comment'),
     path('liked/', views.liked_products, name='liked_products'),
     path('comments/', views.user_comments, name='user_comments'),
+    path('unlike/<int:product_id>/', views.remove_like, name='remove_like'),
 ]
