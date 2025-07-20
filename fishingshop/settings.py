@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'interactions',
     'storages',
-    'aws_storage',
 ]
 
 MIDDLEWARE = [
