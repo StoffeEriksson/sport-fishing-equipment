@@ -31,7 +31,8 @@ def category_view(request, category_name):
 
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    related_products = Product.objects.filter(category=product.category).exclude(pk=pk)[:4]
+    related_products = Product.objects.filter(
+        category=product.category).exclude(pk=pk)[:4]
 
     rating_form = RatingForm()
     comment_form = CommentForm()
@@ -40,8 +41,10 @@ def product_detail(request, pk):
     comments = Comment.objects.filter(product=product).order_by('-created_at')
 
     if request.user.is_authenticated:
-        user_like = Like.objects.filter(user=request.user, product=product).first()
-        user_rating = Rating.objects.filter(user=request.user, product=product).first()
+        user_like = Like.objects.filter(
+            user=request.user, product=product).first()
+        user_rating = Rating.objects.filter(
+            user=request.user, product=product).first()
 
     context = {
         'product': product,

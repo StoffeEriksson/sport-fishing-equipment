@@ -25,5 +25,6 @@ class CommentAdmin(admin.ModelAdmin):
     actions = ['delete_selected']
 
     def short_content(self, obj):
-        return obj.content[:50] + "..." if len(obj.content) > 50 else obj.content
+        return obj.content[:50] + "..." if len(
+            obj.content) > 50 else obj.content
     short_content.short_description = 'Content Preview'

@@ -17,8 +17,9 @@ class Like(models.Model):
 
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ratings')
-    score = models.IntegerField(choices=[(i, i) for i in range(1, 6)])  # 1–5
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='ratings')
+    score = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
     rated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -26,7 +27,6 @@ class Rating(models.Model):
 
     def __str__(self):
         return f"{self.user} rated {self.product.name} a {self.score}"
-
 
 
 class Comment(models.Model):

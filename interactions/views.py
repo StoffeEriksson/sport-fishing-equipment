@@ -7,7 +7,6 @@ from .forms import RatingForm, CommentForm
 from django.db.models import Avg
 
 
-
 @login_required
 def submit_rating(request, product_id):
     """Save or update only rating, then update product's average rating."""
@@ -26,7 +25,8 @@ def submit_rating(request, product_id):
                 rating.save()
 
             # Uppdatera produktens genomsnittsbetyg
-            avg = Rating.objects.filter(product=product).aggregate(Avg('score'))['score__avg']
+            avg = Rating.objects.filter(
+                product=product).aggregate(Avg('score'))['score__avg']
             product.rating = round(avg or 0, 1)
             product.save()
 
@@ -53,7 +53,8 @@ def submit_comment(request, product_id):
 def like_product(request, product_id):
     """Like a product"""
     product = get_object_or_404(Product, id=product_id)
-    like, created = Like.objects.get_or_create(user=request.user, product=product)
+    like, created = Like.objects.get_or_create(
+        user=request.user, product=product)
 
     if not created:
         like.delete()  # Toggle like off
@@ -78,8 +79,10 @@ def remove_like(request, product_id):
 
 @login_required
 def user_comments(request):
-    comments = Comment.objects.filter(user=request.user).select_related('product')
-    return render(request, 'interactions/comments.html', {'comments': comments})
+    comments = Comment.objects.filter(
+        user=request.user).select_related('product')
+    return render(
+        request, 'interactions/comments.html', {'comments': comments})
 
 
 @login_required

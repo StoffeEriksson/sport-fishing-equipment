@@ -7,7 +7,8 @@ class RatingForm(forms.ModelForm):
         model = Rating
         fields = ['score']
         widgets = {
-            'score': forms.RadioSelect(choices=[(i, f'{i} ⭐') for i in range(1, 6)])
+            'score': forms.RadioSelect(
+                choices=[(i, f'{i} ⭐') for i in range(1, 6)])
         }
 
 

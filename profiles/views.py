@@ -4,6 +4,7 @@ from .models import UserProfile
 from .forms import UserProfileForm
 from checkout.models import Order
 
+
 @login_required
 def profile_view(request):
     """
@@ -24,8 +25,6 @@ def profile_view(request):
     })
 
 
-
-
 @login_required
 def order_history(request):
     orders = Order.objects.filter(user=request.user).order_by('-date')
@@ -38,5 +37,8 @@ def order_detail(request, order_number):
     Display a single past order in detail.
     Only accessible to the user who owns the order.
     """
-    order = get_object_or_404(Order, order_number=order_number, user=request.user)
+    order = get_object_or_404(Order,
+                              order_number=order_number,
+                              user=request.user
+                              )
     return render(request, 'profiles/order_detail.html', {'order': order})
