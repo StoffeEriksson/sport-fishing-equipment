@@ -1,6 +1,7 @@
 from django import forms
 from .models import Rating, Comment
 
+
 class RatingForm(forms.ModelForm):
     class Meta:
         model = Rating
