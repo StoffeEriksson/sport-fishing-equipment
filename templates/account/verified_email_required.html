@@ -1,25 +1,33 @@
-{% extends "account/base_manage.html" %}
-{% load i18n %}
-{% load allauth %}
-{% block head_title %}
-    {% trans "Verify Your Email Address" %}
-{% endblock head_title %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Verify Your Email Address" %}
-    {% endelement %}
-    {% url 'account_email' as email_url %}
-    {% element p %}
-        {% blocktrans %}This part of the site requires us to verify that
-you are who you claim to be. For this purpose, we require that you
-verify ownership of your email address. {% endblocktrans %}
-    {% endelement %}
-    {% element p %}
-        {% blocktrans %}We have sent an email to you for
-verification. Please click on the link inside that email. If you do not see the verification email in your main inbox, check your spam folder. Otherwise
-contact us if you do not receive it within a few minutes.{% endblocktrans %}
-    {% endelement %}
-    {% element p %}
-        {% blocktrans %}<strong>Note:</strong> you can still <a href="{{ email_url }}">change your email address</a>.{% endblocktrans %}
-    {% endelement %}
-{% endblock content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card bg-dark text-white border-danger shadow-lg">
+                <div class="card-body text-center">
+                    <h2 class="text-danger mb-4">Verify Your Email Address</h2>
+                    <p class="mb-2">
+                        This part of the site requires us to verify that you are who you claim to be.
+                        For this purpose, we require that you verify ownership of your email address.
+                    </p>
+                    <p class="mb-2">
+                        We have sent an email to you for verification. Please click on the link inside that email.
+                        If you do not see the verification email in your inbox, check your spam folder.
+                        Otherwise contact us if you do not receive it within a few minutes.
+                    </p>
+                    <p>
+                        <strong>Note:</strong> you can still <a href="{% url 'account_email' %}" class="text-info">change your email address</a>.
+                    </p>
+                    <a href="{% url 'account_login' %}" class="btn btn-outline-light mt-3">Back to Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
