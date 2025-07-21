@@ -39,14 +39,14 @@
     <!-- Main Content -->
     <div class="col-md-9">
       <div class="border border-danger p-4 rounded" style="max-width: 600px">
-        <h2 class="mb-4">Order History</h2>
+        <h2 class="mb-4 text-break">Order History</h2>
         {% if orders %}
         <ul class="list-group" id="order-list">
           {% for order in orders %}
           <li
-            class="list-group-item bg-dark text-white mb-2 order-item {% if forloop.counter > 5 %}d-none{% endif %}"
+            class="list-group-item bg-dark text-white mb-2 order-item text-break{% if forloop.counter > 5 %}d-none{% endif %}"
           >
-            <strong>Order Number:</strong> {{ order.order_number }}<br />
+            <strong class="text-break">Order Number:</strong> {{ order.order_number }}<br />
             <strong>Date:</strong> {{ order.date|date:"Y-m-d H:i" }}<br />
             <strong>Total:</strong> ${{ order.grand_total|floatformat:2 }}<br />
             <a

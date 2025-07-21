@@ -9,13 +9,13 @@ class UserProfile(models.Model):
     A user profile model for storing user information and delivery details.
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=20, blank=True)
-    street_address1 = models.CharField(max_length=80, blank=True)
-    street_address2 = models.CharField(max_length=80, blank=True)
-    city = models.CharField(max_length=40, blank=True)
-    county = models.CharField(max_length=80, blank=True)
-    postcode = models.CharField(max_length=20, blank=True)
-    country = models.CharField(max_length=40, blank=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    street_address1 = models.CharField(max_length=80, blank=True, null=True)
+    street_address2 = models.CharField(max_length=80, blank=True, null=True)
+    city = models.CharField(max_length=40, blank=True, null=True)
+    county = models.CharField(max_length=80, blank=True, null=True)
+    postcode = models.CharField(max_length=20, blank=True, null=True)
+    country = models.CharField(max_length=40, blank=True, null=True)
 
     def __str__(self):
         return f"Profile for {self.user.username}"
